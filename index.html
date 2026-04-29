@@ -79,8 +79,8 @@ body::before{content:'';position:fixed;inset:0;z-index:99;pointer-events:none;
 
 /* PRELOADER CENTRAL MATRIX (fewer cells, big + responsive) */
 #att-grid{
-  --cw: clamp(26px, 6.2vw, 52px);
-  --ch: clamp(20px, 4.4vw, 38px);
+  --cw: clamp(11px, 3.9vw, 52px);
+  --ch: clamp(10px, 2.8vw, 38px);
   display:grid;
   grid-template-columns:repeat(22,var(--cw));
   grid-template-rows:repeat(8,var(--ch));
@@ -329,15 +329,28 @@ footer em{color:var(--txm);font-style:normal}
   nav{top:8px;gap:0;background:rgba(8,12,15,.94);padding:4px 6px;max-width:calc(100vw - 18px);overflow:auto;white-space:nowrap}
   nav a{padding:4px 9px;font-size:9px;white-space:nowrap}
   nav::-webkit-scrollbar{height:0}
-  .hn{font-size:clamp(2.3rem, 11vw, 3.4rem)}
+  .hc{padding:1.2rem .9rem}
+  .hn{
+    font-size:clamp(1.75rem, 9.2vw, 2.7rem);
+    line-height:.96;
+    letter-spacing:.02em;
+  }
   .hnline{white-space:nowrap}
   .hmeta{gap:.9rem}
   .ctas{gap:.7rem}
   .bp,.bg{padding:10px 18px}
   #calc{left:14px;right:14px;max-width:none;font-size:9px}
-  #att-grid{gap:2px}
+  #att-grid{gap:1px}
+  .ac{font-size:11px}
+  #att-grid .ac.dim{font-size:11px;letter-spacing:.02em}
+  #att-grid .ac.peak{font-size:12px}
   .stok{gap:5px}
   .tok2{font-size:10px}
+  .sv{font-size:2rem;color:#ff7f47}
+  .sval,.slb,.trkMeta,.rK,.rM,.eyr{font-size:11px;color:rgba(232,237,242,.9)}
+  .rid,.acc .ok{font-size:12px;color:rgba(29,233,182,.98)}
+  .esco{font-size:1.45rem;color:#ff8b5a}
+  .ec,#ps{font-size:11px;color:rgba(255,107,43,.95)}
   .rH{display:none}
   .r{grid-template-columns:110px 1fr 90px}
   .acc .st{display:none}
@@ -346,7 +359,37 @@ footer em{color:var(--txm);font-style:normal}
   #kernel{display:none} /* avoid overlay crowding */
 }
 
+@media(max-width:768px){
+  .trkTop{flex-direction:column;align-items:flex-start}
+  .rH{display:none}
+  .r{
+    grid-template-columns:1fr;
+    gap:8px;
+    padding:14px 12px;
+  }
+  .r > .rid{font-size:9px}
+  .r > div:nth-child(2){order:2}
+  .r > .spark{
+    order:4;
+    width:100%;
+    height:44px;
+  }
+  .r > .acc{
+    order:3;
+    align-items:flex-start;
+    flex-direction:row;
+    justify-content:flex-start;
+    gap:10px;
+  }
+  .acc .st{display:block}
+  .ecard{grid-template-columns:1fr}
+  .eyr,.esco{text-align:left}
+  footer{justify-content:flex-start;padding:1.2rem 1rem}
+}
+
 @media(max-width:420px){
+  .hc{padding:1rem .7rem}
+  nav a{padding:4px 8px;font-size:8px}
   .hmeta{flex-direction:column;align-items:center;gap:.55rem}
   .ctas{flex-direction:column}
   .bp,.bg{width:100%;max-width:320px}
@@ -355,10 +398,36 @@ footer em{color:var(--txm);font-style:normal}
   .eyr,.esco{text-align:left}
   .etl{padding-left:1.2rem}
   .ed{left:-1.2rem}
+  .st{font-size:clamp(1.45rem,8.5vw,1.9rem)}
+  .rT{font-size:.95rem}
+  #ps{letter-spacing:.1em;font-size:10px}
+  .sv{font-size:1.85rem}
+  .rid,.acc .ok{font-size:11px}
+  .sval,.slb,.trkMeta,.rK,.rM,.eyr{font-size:10px}
+  .ec{font-size:10px}
+  #calc{font-size:8px;left:10px;right:10px}
+  .ac{font-size:10px}
+  #att-grid .ac.peak{font-size:11px}
 }
 
 @media(max-width:900px){
   #calc{max-width:calc(100vw - 48px)}
+  .ag{grid-template-columns:1fr}
+  .pc{margin:0 auto}
+  .sr{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .trkMeta{letter-spacing:.13em}
+  .sec{max-width:100%;padding-inline:clamp(.95rem,3.5vw,1.4rem)}
+}
+
+@media(min-width:769px) and (max-width:900px){
+  .rH,.r{grid-template-columns:90px 1fr 130px 90px}
+  .spark{width:130px}
+}
+
+@media(max-width:1100px){
+  .hn{font-size:clamp(2.4rem,7.2vw,4.8rem)}
+  nav{max-width:min(94vw,860px)}
+  .sec{max-width:960px}
 }
 </style>
 </head>
@@ -1139,7 +1208,7 @@ window.addEventListener('scroll',()=>{
   const rng=mulberry32((SEED_A^SEED_B^D1^D2^D3)>>>0);
 
   // The visible dimensions are *your* numbers.
-  const dimTokens=['07','02','04','16','02','79','27','03','67','20','10','2000','7899','7640','07','02'];
+  const dimTokens=['07','02','04','16','02','79','27','03','67','20','10','00','89','40','07','02'];
   // Token -> numeric value used in actual math (stable, bounded)
   const tokVal=(t)=>{
     const n=parseInt(String(t).replaceAll('/',''),10);
@@ -1372,7 +1441,7 @@ window.addEventListener('scroll',()=>{
 
     // Stage 1: show your numbers inside the (orange) name cells for 3–4s
     const holdMs=1700;
-    const numSeq=[...dimTokens, '7899','7640','20','10','2000','07','02','04','79','67'];
+    const numSeq=[...dimTokens, '89','40','20','10','00','07','02','04','79','67'];
     plan.forEach((p,idx)=>{
       const i=p.r*C+p.c;
       const cell=cells[i];
