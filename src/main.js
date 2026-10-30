@@ -7,6 +7,11 @@ import { runPreloader } from './preloader.js';
 import { initField } from './field.js';
 
 gsap.registerPlugin(ScrollTrigger);
+
+/* every load starts fresh at the top: the preloader measures the hero, so it must not be scrolled */
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+window.addEventListener('pagehide', () => window.scrollTo(0, 0));
 document.documentElement.classList.add('js');
 
 const $ = (s, el = document) => el.querySelector(s);

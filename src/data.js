@@ -100,7 +100,7 @@ export const experience = [
 ];
 
 export const education = [
-  { school: 'BMS College of Engineering', detail: 'B.E. Artificial Intelligence & Data Science', years: '2023 — Present', score: '9.68', unit: 'CGPA' },
+  { school: 'BMS College of Engineering', detail: 'B.E. Artificial Intelligence & Data Science', years: '2023 — Present', score: '9.54', unit: 'CGPA' },
   { school: 'Sri Chaitanya Techno School', detail: 'Class XI & XII', years: '2021 — 2023', score: '95.4%', unit: 'JEE 96.1 %ile' },
   { school: 'ACT Sharada Public School', detail: 'Class X', years: '2020 — 2021', score: '95.8%', unit: 'Board' },
 ];

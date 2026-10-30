@@ -168,6 +168,8 @@ body.is-loading .hero__name .l { visibility: hidden; }
 .hero__cta svg { transition: transform 0.35s var(--ease); }
 .hero__cta:hover svg { transform: translateY(3px); }
 @media (max-width: 760px) {
+  .hero { min-height: 0; align-items: flex-start; }
+  .hero__inner { padding-top: 6.5rem; padding-bottom: 2rem; }
   .hero__foot { grid-template-columns: 1fr; gap: 1.2rem; }
   .hero__meta { justify-content: flex-start; gap: 1.2rem; }
 }
